@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <name>spring-rest</name>
     <version>1.0.0-SNAPSHOT</version>
-    <url>https://github.com/openapitools/openapi-generator</url>
+    <url>https://github.com/verbatim-ai/verbatim-java-client-spring-rest</url>
     <description>Verbatim AI CLient based on Spring RestTemplate</description>
     <scm>
         <connection>scm:git:git@github.com:verbatim-ai/verbatim-java-client-spring-rest.git</connection>
