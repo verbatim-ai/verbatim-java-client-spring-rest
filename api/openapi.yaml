@@ -1,0 +1,2209 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: api@verbatim.cloud
+    name: Verbatim AI API Helpdesk
+    url: https://www.verbatim.cloud
+  description: |-
+    **Welcome on Verbatim AI Platform!**
+
+    You'll find here advanced specs of our APIs. You can play with these APIs on our **[Swagger Playground](https://www.verbatim.cloud/api-docs/swagger)**. Feel free to check our **[Cookbook](https://www.verbatim.cloud/cookbook)** to get samples and how start easily.
+
+    _____
+  license:
+    name: Terms of use
+    url: https://www.verbatim.cloud/terms-of-use
+  title: Verbatim AI API
+  version: v1
+  x-logo:
+    url: https://www.verbatim.cloud/logo.svg
+    href: https://www.verbatim.cloud/
+servers:
+- description: Production
+  url: https://api.verbatim.cloud
+tags:
+- description: Services to prompt your corpus and get links from your documents
+  name: Prompt
+- description: Services to manage your corpus
+  name: Corpus
+- description: Services to manage your crawlers
+  name: Crawler
+- description: Services to manage documents in your corpus. You need to create a Corpus
+    first. Check Corpus section if you don't do it yet.
+  name: Document
+- description: Services to get info about token used
+  externalDocs:
+    description: Technical documentation
+    url: https://www.verbatim.cloud
+  name: Authenticate
+paths:
+  /v1/crawler/{corpusId}/id/{crawlerId}:
+    delete:
+      description: Permanent removal of a crawler. No restore after a delete
+      operationId: delete
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the crawler
+        explode: false
+        in: path
+        name: crawlerId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          description: Crawler is deleted
+      security:
+      - JWT: []
+      summary: Delete a crawler
+      tags:
+      - Crawler
+      x-accepts:
+      - application/json
+    get:
+      description: Get detail info about a Crawler
+      operationId: get
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the crawler
+        explode: false
+        in: path
+        name: crawlerId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crawler'
+          description: Crawler detail is given in the body
+      security:
+      - JWT: []
+      summary: Get a crawler
+      tags:
+      - Crawler
+      x-accepts:
+      - application/json
+    put:
+      description: Update display info of your crawler
+      operationId: update
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the crawler
+        explode: false
+        in: path
+        name: crawlerId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrawlerMetadata'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crawler'
+          description: Updated crawler given in the body
+      security:
+      - JWT: []
+      summary: Update metadata of a Crawler
+      tags:
+      - Crawler
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/corpus/{corpusId}:
+    delete:
+      description: Permanent removal of a Corpus. No restore after a delete.
+      operationId: delete_1
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          description: Corpus is deleted
+      security:
+      - JWT: []
+      summary: Delete a Corpus
+      tags:
+      - Corpus
+      x-accepts:
+      - application/json
+    get:
+      description: Get detail info about a Corpus
+      operationId: get_1
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Corpus'
+          description: Corpus given in the body
+      security:
+      - JWT: []
+      summary: Get a Corpus
+      tags:
+      - Corpus
+      x-accepts:
+      - application/json
+    put:
+      description: Update display info of your corpus
+      operationId: update_1
+      parameters:
+      - description: Id of the corpusId
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorpusMetadata'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Corpus'
+          description: Updated corpus given in the body
+      security:
+      - JWT: []
+      summary: Update metadata of a Corpus
+      tags:
+      - Corpus
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}:
+    get:
+      description: List documents available in your corpus
+      operationId: list
+      parameters:
+      - description: Id of the corpus where document is pushed. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Page token. Null to get first page
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          format: int32
+          maximum: 50
+          minimum: 5
+          type: integer
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageDocument'
+          description: result page given in the body
+      security:
+      - JWT: []
+      summary: List documents
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+    post:
+      description: Upload a new document in a corpus
+      operationId: upload
+      parameters:
+      - description: "Id of the corpus where document is pushed. See [Corpus section](https://www.verbatim.cloud/api-docs/index.html#tag/Corpus)\
+          \ to learn more."
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: the name of your file (max 128 characters)
+        example: myfile.txt
+        explode: true
+        in: query
+        name: filename
+        required: true
+        schema:
+          maxLength: 256
+          minLength: 1
+          type: string
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentResumable'
+          description: Document is ready to be uploaded. Resumable upload session
+            is given in the body. Use uploadUrl to start the upload. Please check
+            doc attached to field uploadUrl
+      security:
+      - JWT: []
+      summary: Upload a document
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/crawler/{corpusId}:
+    get:
+      description: List your crawlers
+      operationId: list_1
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Page token. Null to fetch the first page
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size (max 100)
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          format: int32
+          maximum: 50
+          minimum: 5
+          type: integer
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageCrawler'
+          description: page of crawler given in the body
+      security:
+      - JWT: []
+      summary: List the crawler
+      tags:
+      - Crawler
+      x-accepts:
+      - application/json
+    post:
+      description: Create a new crawler. Only available if account has been init and
+        attached to an organization
+      operationId: add
+      parameters:
+      - description: Id of the corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrawlerMetadata'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crawler'
+          description: Corpus is ready to use
+      security:
+      - JWT: []
+      summary: Create a new crawler
+      tags:
+      - Crawler
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/corpus:
+    get:
+      description: List your corpus
+      operationId: list_2
+      parameters:
+      - description: Page token
+        explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          format: int32
+          maximum: 50
+          minimum: 5
+          type: integer
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageCorpus'
+          description: page of corpus given in the body
+      security:
+      - JWT: []
+      summary: List corpus
+      tags:
+      - Corpus
+      x-accepts:
+      - application/json
+    post:
+      description: Create a new corpus where your documents will be stored
+      operationId: add_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorpusMetadata'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Corpus'
+          description: Corpus is ready to use. ID of your corpus is given in the body
+      security:
+      - JWT: []
+      summary: Create a new corpus
+      tags:
+      - Corpus
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v1/prompt/{corpusId}:
+    get:
+      description: Your prompt is process in the engine. Semantic response if give
+        in the body with attachments found from your corpus
+      operationId: prompt
+      parameters:
+      - description: ID of your corpus
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: AI Model to use
+        example: gemini_15_pro
+        explode: true
+        in: query
+        name: model
+        required: true
+        schema:
+          enum:
+          - gemini_15_pro
+          - gemini_20_flash
+          type: string
+        style: form
+      - description: Query to run on the engine (Max 1014 characters allowed)
+        example: What is the name of the Uk prime minister ?
+        explode: true
+        in: query
+        name: query
+        required: true
+        schema:
+          maxLength: 2048
+          minLength: 0
+          type: string
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptResponse'
+          description: Response is given in the body
+      security:
+      - JWT: []
+      summary: Run a prompt
+      tags:
+      - Prompt
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/web/{documentId}:
+    get:
+      description: Get detail info about a Web page
+      operationId: getWebPage
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPage'
+          description: Document given in the body
+      security:
+      - JWT: []
+      summary: Get a WebPage
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/web/{documentId}/preview/{previewSize}:
+    get:
+      description: Get the preview url of a web page.
+      operationId: previewWeb
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      - description: Size of the preview
+        explode: false
+        in: path
+        name: previewSize
+        required: true
+        schema:
+          enum:
+          - original
+          - small
+          - medium
+          - large
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSign'
+          description: Access url given in the body
+      security:
+      - JWT: []
+      summary: Preview a web page
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/doc/{documentId}:
+    get:
+      description: Get detail info about a Document
+      operationId: getDoc
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: Document given in the body
+      security:
+      - JWT: []
+      summary: Get a document
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/doc/{documentId}/page/{pageIndex}/preview/{previewSize}:
+    get:
+      description: Get the preview url of one of the page of the document.
+      operationId: previewDoc
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      - description: "Index of the page in the document, use 0 for the first page"
+        explode: false
+        in: path
+        name: pageIndex
+        required: true
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: simple
+      - description: Size of the preview
+        explode: false
+        in: path
+        name: previewSize
+        required: true
+        schema:
+          enum:
+          - original
+          - small
+          - medium
+          - large
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSign'
+          description: Access url given in the body
+      security:
+      - JWT: []
+      summary: Preview a document image
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/doc/{documentId}/download:
+    get:
+      description: Get a secured and signed urls to download file from a document
+        ID
+      operationId: download
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSign'
+          description: Access url given in the body
+      security:
+      - JWT: []
+      summary: Get the download link
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+  /v1/auth/whoami:
+    get:
+      description: Get info about the active session (token)
+      externalDocs:
+        description: Technical documentation
+        url: https://www.verbatim.cloud/api-docs
+      operationId: whoami
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+          description: Token info given in the body
+      security:
+      - JWT: []
+      summary: Info about the token used for authenticated this query
+      tags:
+      - Authenticate
+      x-codeSamples:
+      - label: PHP
+        lang: php
+        source:
+          $ref: https://wwww.verbatim.cloud/api-docs/samples/php/auth/auth.php
+      x-accepts:
+      - application/json
+  /v1/doc/{corpusId}/id/{documentId}:
+    delete:
+      description: Delete a document from your corpus
+      operationId: delete_2
+      parameters:
+      - description: Id of the corpus where document is hosted. See Corpus section
+          to learn more
+        explode: false
+        in: path
+        name: corpusId
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 0
+          type: string
+        style: simple
+      - description: Id of the document
+        explode: false
+        in: path
+        name: documentId
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        style: simple
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal error. Check body to get more info
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Too many request. Check your quota on your dashboard
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Service temporary not available. Reason is given the body
+        "403":
+          description: Not authorized. Access not granted for this request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Document not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request. Invalid body or missing parameter
+        "200":
+          description: Document has been deleted form your corpus
+      security:
+      - JWT: []
+      summary: Delete a document
+      tags:
+      - Document
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    Error:
+      description: API response error
+      example:
+        path: path
+        error: error
+        message: message
+        timestamp: 2000-01-23T04:56:07.000+00:00
+        status: 429
+      properties:
+        timestamp:
+          description: Timestamp of the error
+          format: date-time
+          type: string
+        status:
+          description: HTTP Code
+          example: 429
+          format: int32
+          type: integer
+        error:
+          description: HTTP Error
+          type: string
+        message:
+          description: Error message
+          type: string
+        path:
+          description: Path of the initial request
+          type: string
+    CrawlerMetadata:
+      example:
+        maxCrawlDepth: 3
+        displayName: My crawler
+        description: A short description of my crawler
+        url: https://my.website.com
+        enabled: true
+      properties:
+        displayName:
+          description: Display name of your Crawler
+          example: My crawler
+          maxLength: 128
+          type: string
+        description:
+          description: Description of your Crawler
+          example: A short description of my crawler
+          maxLength: 512
+          type: string
+        url:
+          description: Root url of the domain the crawl. Must start with http// or
+            https://
+          example: https://my.website.com
+          maxLength: 128
+          type: string
+        maxCrawlDepth:
+          description: Maximum crawl depth
+          example: 3
+          format: int32
+          maximum: 5
+          type: integer
+        enabled:
+          description: "Activation state of the crawler. True, the crawler is enable\
+            \ and have recurrent crawl schedule. False, the crawler is disable, no\
+            \ crawl until is back to an enable state."
+          type: boolean
+      required:
+      - displayName
+      - url
+    Crawler:
+      example:
+        lastCrawl: 2000-01-23T04:56:07.000+00:00
+        displayName: My crawler
+        description: A short description of my crawler
+        url: https://my.website.com
+        enabled: true
+        maxCrawlDepth: 3
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        corpusId: corpusId
+        size: 6
+        nextCrawl: 2000-01-23T04:56:07.000+00:00
+        id: id
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        nbDoc: 0
+      properties:
+        displayName:
+          description: Display name of your Crawler
+          example: My crawler
+          maxLength: 128
+          type: string
+        description:
+          description: Description of your Crawler
+          example: A short description of my crawler
+          maxLength: 512
+          type: string
+        url:
+          description: Root url of the domain the crawl. Must start with http// or
+            https://
+          example: https://my.website.com
+          maxLength: 128
+          type: string
+        maxCrawlDepth:
+          description: Maximum crawl depth
+          example: 3
+          format: int32
+          maximum: 5
+          type: integer
+        enabled:
+          description: "Activation state of the crawler. True, the crawler is enable\
+            \ and have recurrent crawl schedule. False, the crawler is disable, no\
+            \ crawl until is back to an enable state."
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          description: ID of the crawler. Primary key use to index this crawler
+          type: string
+        corpusId:
+          description: ID of the corpus where the crawler is attached
+          type: string
+        nextCrawl:
+          format: date-time
+          type: string
+        lastCrawl:
+          format: date-time
+          type: string
+        nbDoc:
+          description: Number of document crawler by the crawler. Merged into your
+            quota
+          format: int32
+          type: integer
+        size:
+          description: Storage size use by the crawler.  Merged into your quota
+          format: int64
+          type: integer
+      required:
+      - displayName
+      - url
+    CorpusMetadata:
+      example:
+        displayName: My corpus
+        description: A short description of my corpus
+      properties:
+        displayName:
+          description: Display nme of your Corpus. Name attached to your corpus but
+            not used a sa key
+          example: My corpus
+          maxLength: 128
+          type: string
+        description:
+          description: Description nme of your Corpus
+          example: A short description of my corpus
+          maxLength: 512
+          type: string
+    Corpus:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        size: 6
+        displayName: displayName
+        description: description
+        id: id
+        orgId: orgId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        nbDoc: 0
+      properties:
+        displayName:
+          description: Display name of the Corpus
+          type: string
+        description:
+          description: Description of the Corpus
+          type: string
+        createdAt:
+          description: Creation date of the corpus
+          format: date-time
+          type: string
+        updatedAt:
+          description: Last update on the corpus
+          format: date-time
+          type: string
+        orgId:
+          description: ID of your organization. Internal use only
+          type: string
+        id:
+          description: ID of the Corpus. Use this ID as primary key on API
+          type: string
+        nbDoc:
+          description: Number of doc in the Corpus
+          format: int32
+          type: integer
+        size:
+          description: Size (in bytes) of the corpus
+          format: int64
+          type: integer
+    DocumentPage:
+      description: Page of the document
+      example:
+        index: 0
+        title: title
+      properties:
+        index:
+          description: "Index of the page, 0 for the first, n-1 for the last one"
+          format: int32
+          type: integer
+        title:
+          description: Title of the page
+          type: string
+    DocumentResumable:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        corpusId: corpusId
+        filename: myfile.pdf
+        pages:
+        - index: 0
+          title: title
+        - index: 0
+          title: title
+        size: 1024
+        uploadSessionURL: uploadSessionURL
+        uploadSessionExpiredAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        state: unknown
+        contentType: application/pdf
+        nbPages: 5
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        corpusId:
+          description: ID of the corpus where the document is stored
+          type: string
+        state:
+          description: "Storage size, given in bytes"
+          enum:
+          - unknown
+          - pending
+          - processing
+          - ready
+          - error
+          type: string
+        filename:
+          description: Filename of the document
+          example: myfile.pdf
+          type: string
+        contentType:
+          description: Content type of the document
+          example: application/pdf
+          type: string
+        size:
+          description: "Storage size, given in bytes"
+          example: 1024
+          format: int64
+          type: integer
+        nbPages:
+          description: Total number of pages in the document
+          example: 5
+          format: int32
+          type: integer
+        pages:
+          description: "Info abouts pages of the document (title, previews, fileId\
+            \ of the preview)"
+          items:
+            $ref: '#/components/schemas/DocumentPage'
+          type: array
+        uploadSessionURL:
+          description: "Upload url to push chunks of your file.**[Resumable documentation\
+            \ from Google](https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload)**\
+            \ and **[our Cookbook](https://www.verbatim.cloud/cookbook/resumable-uploads)**\
+            \ explain how use this `uploadSessionURL`"
+          type: string
+        uploadSessionExpiredAt:
+          description: Timestamp when URL will be expired. `uploadSessionURL` can't
+            be used any more after the date
+          format: date-time
+          type: string
+    Document:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        corpusId: corpusId
+        filename: myfile.pdf
+        pages:
+        - index: 0
+          title: title
+        - index: 0
+          title: title
+        size: 1024
+        id: id
+        state: unknown
+        contentType: application/pdf
+        nbPages: 5
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        corpusId:
+          description: ID of the corpus where the document is stored
+          type: string
+        state:
+          description: "Storage size, given in bytes"
+          enum:
+          - unknown
+          - pending
+          - processing
+          - ready
+          - error
+          type: string
+        filename:
+          description: Filename of the document
+          example: myfile.pdf
+          type: string
+        contentType:
+          description: Content type of the document
+          example: application/pdf
+          type: string
+        size:
+          description: "Storage size, given in bytes"
+          example: 1024
+          format: int64
+          type: integer
+        nbPages:
+          description: Total number of pages in the document
+          example: 5
+          format: int32
+          type: integer
+        pages:
+          description: "Info abouts pages of the document (title, previews, fileId\
+            \ of the preview)"
+          items:
+            $ref: '#/components/schemas/DocumentPage'
+          type: array
+    PromptDocumentAttachment:
+      example:
+        pages:
+        - 5
+        - 5
+        document:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          corpusId: corpusId
+          filename: myfile.pdf
+          pages:
+          - index: 0
+            title: title
+          - index: 0
+            title: title
+          size: 1024
+          id: id
+          state: unknown
+          contentType: application/pdf
+          nbPages: 5
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        text: text
+      properties:
+        id:
+          description: Document id
+          type: string
+        text:
+          description: Grounding text attach to the prompt
+          type: string
+        pages:
+          description: List of the index of the pages in the document attach to this
+            prompt
+          items:
+            format: int32
+            type: integer
+          type: array
+        document:
+          $ref: '#/components/schemas/Document'
+    PromptPart:
+      example:
+        kind: doc
+        start: 0
+        index: 1
+        end: 6
+      properties:
+        start:
+          description: define the beginning of the substring in the answer which is
+            attached to a document. Document is defined by the attachmentIndex
+          format: int32
+          type: integer
+        end:
+          description: define the end of the substring in the answer which is attached
+            to a document.Document is defined by the attachmentIndex
+          format: int32
+          type: integer
+        index:
+          description: Index of the attachment related to this substring
+          format: int32
+          type: integer
+        kind:
+          description: "Kind of attachment. For web, you'll found the attachment in\
+            \ web[index]. For document, you'll found the attachment in document[index]"
+          enum:
+          - doc
+          - web
+          type: string
+    PromptResponse:
+      example:
+        corpusId: corpusId
+        web:
+        - id: id
+          text: text
+          title: title
+          url: url
+        - id: id
+          text: text
+          title: title
+          url: url
+        query: query
+        document:
+        - pages:
+          - 5
+          - 5
+          document:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            corpusId: corpusId
+            filename: myfile.pdf
+            pages:
+            - index: 0
+              title: title
+            - index: 0
+              title: title
+            size: 1024
+            id: id
+            state: unknown
+            contentType: application/pdf
+            nbPages: 5
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          text: text
+        - pages:
+          - 5
+          - 5
+          document:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            corpusId: corpusId
+            filename: myfile.pdf
+            pages:
+            - index: 0
+              title: title
+            - index: 0
+              title: title
+            size: 1024
+            id: id
+            state: unknown
+            contentType: application/pdf
+            nbPages: 5
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          text: text
+        parts:
+        - kind: doc
+          start: 0
+          index: 1
+          end: 6
+        - kind: doc
+          start: 0
+          index: 1
+          end: 6
+        issuedAt: 2000-01-23T04:56:07.000+00:00
+        text: text
+      properties:
+        issuedAt:
+          format: date-time
+          type: string
+        corpusId:
+          type: string
+        query:
+          description: Your query
+          type: string
+        text:
+          description: Generative AI Agent answer to your query
+          type: string
+        parts:
+          items:
+            $ref: '#/components/schemas/PromptPart'
+          type: array
+        document:
+          items:
+            $ref: '#/components/schemas/PromptDocumentAttachment'
+          type: array
+        web:
+          items:
+            $ref: '#/components/schemas/PromptWebAttachment'
+          type: array
+    PromptWebAttachment:
+      example:
+        id: id
+        text: text
+        title: title
+        url: url
+      properties:
+        id:
+          description: Document id
+          type: string
+        text:
+          description: Grounding text attach to the prompt
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    PageDocument:
+      example:
+        nextPageToken: ""
+        count: 6
+        items:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          corpusId: corpusId
+          filename: myfile.pdf
+          pages:
+          - index: 0
+            title: title
+          - index: 0
+            title: title
+          size: 1024
+          id: id
+          state: unknown
+          contentType: application/pdf
+          nbPages: 5
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          corpusId: corpusId
+          filename: myfile.pdf
+          pages:
+          - index: 0
+            title: title
+          - index: 0
+            title: title
+          size: 1024
+          id: id
+          state: unknown
+          contentType: application/pdf
+          nbPages: 5
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Document'
+          type: array
+        nextPageToken: {}
+        count:
+          format: int32
+          type: integer
+    WebPage:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        corpusId: corpusId
+        id: id
+        state: unknown
+        title: title
+        url: url
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        corpusId:
+          description: ID of the corpus where the document is stored
+          type: string
+        state:
+          description: "Storage size, given in bytes"
+          enum:
+          - unknown
+          - pending
+          - processing
+          - ready
+          - error
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    DocumentSign:
+      example:
+        expiredAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        documentId: documentId
+        signUrl: signUrl
+      properties:
+        documentId:
+          description: ID of the document
+          type: string
+        signUrl:
+          description: Secured url to access your doc
+          type: string
+        expiredAt:
+          description: Timestamp when signed URL will expire. Your signUrl can't be
+            used any more after this date.
+          format: date-time
+          type: string
+        createdAt:
+          description: Timestamp when signed url has been emit.
+          format: date-time
+          type: string
+    PageCrawler:
+      example:
+        nextPageToken: ""
+        count: 0
+        items:
+        - lastCrawl: 2000-01-23T04:56:07.000+00:00
+          displayName: My crawler
+          description: A short description of my crawler
+          url: https://my.website.com
+          enabled: true
+          maxCrawlDepth: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          corpusId: corpusId
+          size: 6
+          nextCrawl: 2000-01-23T04:56:07.000+00:00
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          nbDoc: 0
+        - lastCrawl: 2000-01-23T04:56:07.000+00:00
+          displayName: My crawler
+          description: A short description of my crawler
+          url: https://my.website.com
+          enabled: true
+          maxCrawlDepth: 3
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          corpusId: corpusId
+          size: 6
+          nextCrawl: 2000-01-23T04:56:07.000+00:00
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          nbDoc: 0
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Crawler'
+          type: array
+        nextPageToken: {}
+        count:
+          format: int32
+          type: integer
+    PageCorpus:
+      example:
+        nextPageToken: ""
+        count: 0
+        items:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          size: 6
+          displayName: displayName
+          description: description
+          id: id
+          orgId: orgId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          nbDoc: 0
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          size: 6
+          displayName: displayName
+          description: description
+          id: id
+          orgId: orgId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          nbDoc: 0
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Corpus'
+          type: array
+        nextPageToken: {}
+        count:
+          format: int32
+          type: integer
+    TokenInfo:
+      example:
+        organizationId: organizationId
+        emailVerified: true
+        name: name
+        keyId: keyId
+        issuedAt: 2000-01-23T04:56:07.000+00:00
+        userId: userId
+        issuer: issuer
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+        email: email
+      properties:
+        issuer:
+          description: Issuer of the token
+          type: string
+        issuedAt:
+          description: When this token has been produced
+          format: date-time
+          type: string
+        expiresAt:
+          description: Expiration date of this token
+          format: date-time
+          type: string
+        organizationId:
+          description: ID of the organization who owned the authenticate user
+          type: string
+        userId:
+          description: "UID of the user, authenticated when the current token"
+          type: string
+        keyId:
+          description: ID of the key used to sign he token. Only for Verbatim issuer
+          type: string
+        email:
+          description: Email of the authenticate user
+          type: string
+        name:
+          description: Name of the authenticate user
+          type: string
+        emailVerified:
+          description: True when email is verified
+          type: boolean
+  securitySchemes:
+    JWT:
+      bearerFormat: JWT
+      description: "Secured JWT token to authenticate APIs. **[How get a token ?](https://www.verbatim.cloud/cookbook/how-get-a-token)**"
+      in: header
+      scheme: bearer
+      type: http
+
