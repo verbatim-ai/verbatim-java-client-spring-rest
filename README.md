@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>cloud.verbatim.client</groupId>
   <artifactId>spring-rest</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "cloud.verbatim.client:spring-rest:1.0.0-SNAPSHOT"
+     implementation "cloud.verbatim.client:spring-rest:1.0-SNAPSHOT"
   }
 ```
 
@@ -77,7 +77,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/spring-rest-1.0.0-SNAPSHOT.jar`
+- `target/spring-rest-1.0-SNAPSHOT.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
