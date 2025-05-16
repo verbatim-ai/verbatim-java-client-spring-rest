@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'com.verbatim.client'
+group = 'cloud.verbatim.client'
 version = '1.0.0-SNAPSHOT'
 
 buildscript {

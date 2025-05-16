@@ -27,12 +27,12 @@ List documents available in your corpus
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -108,12 +108,12 @@ Delete a document from your corpus
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -186,12 +186,12 @@ Get a secured and signed urls to download file from a document ID
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -265,12 +265,12 @@ Get detail info about a Document
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -344,12 +344,12 @@ Get detail info about a Web page
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -423,12 +423,12 @@ Get the preview url of one of the page of the document.
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -506,12 +506,12 @@ Get the preview url of a web page.
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -587,12 +587,12 @@ Upload a new document in a corpus
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.DocumentApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.DocumentApi;
 
 public class Example {
     public static void main(String[] args) {

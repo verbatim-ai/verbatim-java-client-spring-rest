@@ -20,12 +20,12 @@ Your prompt is process in the engine. Semantic response if give in the body with
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.PromptApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.PromptApi;
 
 public class Example {
     public static void main(String[] args) {

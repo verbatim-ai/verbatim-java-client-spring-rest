@@ -24,12 +24,12 @@ Create a new crawler. Only available if account has been init and attached to an
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.CrawlerApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.CrawlerApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -103,12 +103,12 @@ Permanent removal of a crawler. No restore after a delete
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.CrawlerApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.CrawlerApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -181,12 +181,12 @@ Get detail info about a Crawler
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.CrawlerApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.CrawlerApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -260,12 +260,12 @@ List your crawlers
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.CrawlerApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.CrawlerApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -341,12 +341,12 @@ Update display info of your crawler
 
 ```java
 // Import classes:
-import com.verbatim.client.spring_rest.invoker.ApiClient;
-import com.verbatim.client.spring_rest.invoker.ApiException;
-import com.verbatim.client.spring_rest.invoker.Configuration;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.invoker.models.*;
-import com.verbatim.client.spring_rest.api.CrawlerApi;
+import cloud.verbatim.client.spring_rest.invoker.ApiClient;
+import cloud.verbatim.client.spring_rest.invoker.ApiException;
+import cloud.verbatim.client.spring_rest.invoker.Configuration;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.invoker.models.*;
+import cloud.verbatim.client.spring_rest.api.CrawlerApi;
 
 public class Example {
     public static void main(String[] args) {

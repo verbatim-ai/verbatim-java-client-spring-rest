@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>com.verbatim.client</groupId>
+  <groupId>cloud.verbatim.client</groupId>
   <artifactId>spring-rest</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <scope>compile</scope>
@@ -63,7 +63,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.verbatim.client:spring-rest:1.0.0-SNAPSHOT"
+     implementation "cloud.verbatim.client:spring-rest:1.0.0-SNAPSHOT"
   }
 ```
 
@@ -86,10 +86,10 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import com.verbatim.client.spring_rest.invoker.*;
-import com.verbatim.client.spring_rest.invoker.auth.*;
-import com.verbatim.client.spring_rest.models.*;
-import com.verbatim.client.spring_rest.api.AuthenticateApi;
+import cloud.verbatim.client.spring_rest.invoker.*;
+import cloud.verbatim.client.spring_rest.invoker.auth.*;
+import cloud.verbatim.client.spring_rest.models.*;
+import cloud.verbatim.client.spring_rest.api.AuthenticateApi;
 
 public class AuthenticateApiExample {
 
