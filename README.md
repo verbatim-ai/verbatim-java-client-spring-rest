@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>cloud.verbatim.client</groupId>
   <artifactId>spring-rest</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
